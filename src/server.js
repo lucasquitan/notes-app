@@ -2,6 +2,9 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 
+// Inside importations
+const routes = require('./routes/routes');
+
 // Initializations
 const app = express();
 
@@ -25,9 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 // Global variables
 
 // Routes
-app.get('/', (req, res) => {
-  res.render('index');
-});
+app.use(routes);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
