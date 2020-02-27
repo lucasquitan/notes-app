@@ -3,7 +3,8 @@ const exphbs = require('express-handlebars');
 const path = require('path');
 
 // Inside importations
-const routes = require('./routes/routes');
+const indexRoutes = require('./routes/index.routes');
+const notesRoutes = require('./routes/notes.routes');
 
 // Initializations
 const app = express();
@@ -28,7 +29,8 @@ app.use(express.urlencoded({ extended: false }));
 // Global variables
 
 // Routes
-app.use(routes);
+app.use(indexRoutes);
+app.use(notesRoutes);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
