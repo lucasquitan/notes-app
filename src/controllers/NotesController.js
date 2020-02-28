@@ -12,7 +12,7 @@ const NotesController = {};
  */
 
 NotesController.renderNoteForm = (req, res) => {
-  res.render('notes/newNote');
+  res.render('notes/new-note');
 };
 
 NotesController.createNewNote = async (req, res) => {
@@ -32,12 +32,16 @@ NotesController.renderNotes = async (req, res) => {
   res.render('notes/all-notes', { notes });
 };
 
-NotesController.renderEditForm = (req, res) => {
-  res.send('Edit formm');
+NotesController.renderEditForm = async (req, res) => {
+  const note = await Note.findById(req.params.id);
+  console.log(note);
+  res.render('notes/edit-note', { note });
 };
 
-NotesController.updateNote = (req, res) => {
-  res.send('Editing note');
+NotesController.updateNote = async (req, res) => {
+  const { title, description } = req.body;
+  await Note.findByIdAndUpdate(req.params.id, { title, description });
+  res.redirect('/notes');
 };
 
 NotesController.deleteNote = async (req, res) => {
