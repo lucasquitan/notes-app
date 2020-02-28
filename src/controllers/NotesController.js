@@ -24,7 +24,7 @@ NotesController.createNewNote = async (req, res) => {
   });
 
   await newNote.save();
-  res.send('You note was saved on Database.');
+  res.redirect('/notes');
 };
 
 NotesController.renderNotes = async (req, res) => {
@@ -40,8 +40,10 @@ NotesController.updateNote = (req, res) => {
   res.send('Editing note');
 };
 
-NotesController.deleteNote = (req, res) => {
-  res.send('Note deleted');
+NotesController.deleteNote = async (req, res) => {
+  await Note.findByIdAndDelete(req.params.id);
+
+  res.redirect('/notes');
 };
 
 module.exports = NotesController;

@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
+const methodOvrd = require('method-override');
 
 // Inside importations
 const indexRoutes = require('./routes/index.routes');
@@ -27,6 +28,7 @@ app.set('view engine', 'hbs');
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
+app.use(methodOvrd('_method'));
 
 // Global variables
 
