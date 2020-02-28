@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
+const morgan = require('morgan');
 
 // Inside importations
 const indexRoutes = require('./routes/index.routes');
@@ -24,6 +25,7 @@ app.engine(
 app.set('view engine', 'hbs');
 
 // Middlewares
+app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 
 // Global variables

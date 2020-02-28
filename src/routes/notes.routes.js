@@ -5,7 +5,7 @@ const NotesController = require('../controllers/NotesController');
 const routes = Router();
 
 routes.get('/notes/add', NotesController.renderNoteForm);
-routes.post('/notes/add', NotesController.createNewNote);
+routes.post('/notes/new-note', NotesController.createNewNote);
 
 routes.get('/notes', NotesController.renderNotes);
 routes.get('/notes/edit/:id', NotesController.renderEditForm);
