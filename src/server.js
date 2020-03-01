@@ -6,9 +6,10 @@ const methodOvrd = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
 
-// Inside importations
-const indexRoutes = require('./routes/index.routes');
-const notesRoutes = require('./routes/notes.routes');
+// Routes importations
+const index = require('./routes/index.routes');
+const notes = require('./routes/notes.routes');
+const users = require('./routes/users.routes');
 
 // Initializations
 const app = express();
@@ -43,12 +44,14 @@ app.use(flash());
 // Global variables
 app.use((req, res, next) => {
   res.locals.sucess = req.flash('sucess');
+  res.locals.error = req.flash('error');
   next();
 });
 
 // Routes
-app.use(indexRoutes);
-app.use(notesRoutes);
+app.use(index);
+app.use(notes);
+app.use(users);
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
