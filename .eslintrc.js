@@ -23,6 +23,8 @@ module.exports = {
     "no-param-readdign": "off",
     "camelcase": "off",
     "no-console": "off",
+    "no-return-await": "off",
+    "func-names": "off",
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
   },
 };
