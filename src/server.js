@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const methodOvrd = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 
 // Routes importations
 const index = require('./routes/index.routes');
@@ -13,6 +14,7 @@ const users = require('./routes/users.routes');
 
 // Initializations
 const app = express();
+require('./config/passport');
 
 // Settings
 app.set('port', process.env.PORT || 4000);
@@ -40,11 +42,14 @@ app.use(
   })
 );
 app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Global variables
 app.use((req, res, next) => {
   res.locals.sucess = req.flash('sucess');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user || null;
   next();
 });
 

@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const User = require('../models/User');
 
 const UserController = {};
@@ -47,12 +49,16 @@ UserController.renderSingInForm = (req, res) => {
   res.render('users/singin');
 };
 
-UserController.singin = (req, res) => {
-  res.send('singin');
-};
+UserController.singin = passport.authenticate('local', {
+  failureRedirect: '/users/singin',
+  successRedirect: '/notes',
+  failureFlash: true,
+});
 
 UserController.logout = (req, res) => {
-  res.send('logout');
+  req.logout();
+  req.flash('sucess', 'You are disconnected successfully');
+  res.redirect('/users/singin');
 };
 
 module.exports = UserController;
