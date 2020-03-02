@@ -5,10 +5,10 @@ const User = require('../models/User');
 const UserController = {};
 
 UserController.renderSignUpForm = (req, res) => {
-  res.render('users/singup');
+  res.render('users/signup');
 };
 
-UserController.singup = async (req, res) => {
+UserController.signup = async (req, res) => {
   const errors = [];
 
   const { name, email, password, confirmPassword } = req.body;
@@ -26,13 +26,13 @@ UserController.singup = async (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.render('users/singup', { errors, name, email });
+    res.render('users/signup', { errors, name, email });
   } else {
     const userExists = await User.findOne({ email });
 
     if (userExists) {
       req.flash('error', 'The e-mail is already in use.');
-      res.redirect('/users/singup');
+      res.redirect('/users/signup');
     } else {
       const user = new User({ name, email, password });
 
@@ -40,17 +40,17 @@ UserController.singup = async (req, res) => {
       await user.save();
 
       req.flash('sucess', 'Account created successfully');
-      res.redirect('/users/singin');
+      res.redirect('/users/signin');
     }
   }
 };
 
-UserController.renderSingInForm = (req, res) => {
-  res.render('users/singin');
+UserController.renderSignInForm = (req, res) => {
+  res.render('users/signin');
 };
 
-UserController.singin = passport.authenticate('local', {
-  failureRedirect: '/users/singin',
+UserController.signin = passport.authenticate('local', {
+  failureRedirect: '/users/signin',
   successRedirect: '/notes',
   failureFlash: true,
 });
@@ -58,7 +58,7 @@ UserController.singin = passport.authenticate('local', {
 UserController.logout = (req, res) => {
   req.logout();
   req.flash('sucess', 'You are disconnected successfully');
-  res.redirect('/users/singin');
+  res.redirect('/users/signin');
 };
 
 module.exports = UserController;

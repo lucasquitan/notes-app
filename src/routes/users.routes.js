@@ -4,11 +4,11 @@ const UserController = require('../controllers/UserController');
 
 const routes = Router();
 
-routes.get('/users/singup', UserController.renderSignUpForm);
-routes.post('/users/singup', UserController.singup);
+routes.get('/users/signup', UserController.renderSignUpForm);
+routes.post('/users/signup', UserController.signup);
 
-routes.get('/users/singin', UserController.renderSingInForm);
-routes.post('/users/singin', UserController.singin);
+routes.get('/users/signin', UserController.renderSignInForm);
+routes.post('/users/signin', UserController.signin);
 
 routes.get('/users/logout', UserController.logout);
 
